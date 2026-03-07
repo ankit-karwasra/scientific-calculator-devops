@@ -1,0 +1,15 @@
+---
+- hosts: servers
+  connection: local
+
+  tasks:
+
+  - name: Pull latest Docker image
+    command: docker pull ayush81080/calculator:latest
+
+  - name: Remove existing container if present
+    command: docker rm -f calculator
+    ignore_errors: yes
+
+  - name: Run calculator container
+    command: docker run -dit --name calculator ayush81080/calculator:latest
